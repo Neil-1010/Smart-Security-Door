@@ -9,7 +9,7 @@ server_socket.bind(server_address)
 
 server_socket.listen(1)
 
-print('Server started and listenign for connections...')
+print('Started. Server is listening for connections...')
 
 while True:
     client_socket = None

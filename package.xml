@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>security_door_project</name>
+  <name>smart-security-door</name>
   <version>0.0.0</version>
-  <description>The security_door_project package</description>
+  <description>The smart-security-door package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->

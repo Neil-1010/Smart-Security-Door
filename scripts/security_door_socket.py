@@ -15,6 +15,11 @@ if __name__ == '__main__':
     rospy.init_node('door_listener')
     pub = rospy.Publisher('/detect_result',Bool, queue_size =1)
 
+    known_face_names = [
+    "Chun Fang",
+    "Neil"
+    ]
+
     while True:
         client_socket = None
         try:
@@ -22,14 +27,20 @@ if __name__ == '__main__':
             response = client_socket.recv(1024)
             data = response.decode()
             print("Received response: " +str(data))
-            if data == "Chun Fang":
-                pub.publish(Bool(True))
-                print("Hi, Chun Fang!")
-            elif data == "Neil":
-                pub.publish(Bool(True))
-                print("Hi, Neil!")
+
+            # =========================================
+            # Recognize registered users based on conditions
+            if data in known_face_names:
+                print("Welcome, "+str(data)+"!")
+            # if data == "Chun Fang":
+            #     pub.publish(Bool(True))
+            #     print("Hi, Chun Fang!")
+            # elif data == "Neil":
+            #     pub.publish(Bool(True))
+            #     print("Hi, Neil!")
             else:
                 pub.publish(Bool(False))
+            # =========================================
 
         except KeyboardInterrupt:
             if client_socket:
