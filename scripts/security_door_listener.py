@@ -9,7 +9,7 @@ count_detect = 0
 def callback_receive_data(msg):
     global count_detect, open_door
     if len(msg.faces) > 0:
-        if msg.faces[0].label == "chunfang":
+        if msg.faces[0].label == "Chun Fang":
             count_detect += 1
     else:
         open_door = False

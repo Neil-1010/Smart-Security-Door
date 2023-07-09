@@ -32,9 +32,9 @@ class Server:
 
 if __name__ == '__main__':
     rospy.init_node('door_output')
-
     server = Server()
+    server.compute()
     sub = rospy.Subscriber('/result', String, server.keyword_callback) 
     sub2 = rospy.Subscriber('/detect_result', Bool, server.detection_callback)
-
+    
     rospy.spin()
