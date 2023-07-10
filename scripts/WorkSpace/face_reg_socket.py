@@ -16,7 +16,7 @@ client_socket.connect(server_address)
 
 # PLEASE NOTE: This example requires OpenCV (the `cv2` library) to be installed only to read from your webcam.
 # OpenCV is *not* required to use the face_recognition library. It's only required if you want to run this
-# specific demo. If you have trouble installing i, try any of the other demos that don't require it instead.
+# specific demo. If you have trouble installing it, try any of the other demos that don't require it instead.
 
 # Get a reference to webcam #0 (the default one)
 video_capture = cv2.VideoCapture(0)

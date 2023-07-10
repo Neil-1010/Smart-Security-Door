@@ -32,8 +32,8 @@ if __name__ == '__main__':
             # Recognize registered users based on conditions
             if data in known_face_names:
                 print("Welcome, "+str(data)+"!")
+                pub.publish(Bool(True))
             # if data == "Chun Fang":
-            #     pub.publish(Bool(True))
             #     print("Hi, Chun Fang!")
             # elif data == "Neil":
             #     pub.publish(Bool(True))
