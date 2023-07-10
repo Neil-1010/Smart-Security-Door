@@ -20,6 +20,8 @@ class Server:
     
     def compute(self):
         global correct
+        # Keyword represents the 'access passcode'
+        # A valid access shall require correct keyword and valid facial recognition
         if self.keyword == "hello" and self.detection == True:
             if correct == False:
                 subprocess.check_output(['rosrun', 'sound_play', 'say.py', "Correct"])
@@ -31,9 +33,14 @@ class Server:
 
 
 if __name__ == '__main__':
+    
+    # Initiate door_output node
     rospy.init_node('door_output')
+
     server = Server()
     server.compute()
+    
+    # Establish connections
     sub = rospy.Subscriber('/result', String, server.keyword_callback) 
     sub2 = rospy.Subscriber('/detect_result', Bool, server.detection_callback)
     
