@@ -9,8 +9,8 @@ Warm greetings from our Smart Security Door!
   
 For example shown above, Chun Fang is registered as **user1**, while Neil is registered as **user2**. They are recognized as authorized users.  
 To register additional authorities, you may amend the list of `known_face_names` and `known_face_encodings` along with their facial images stored in the `/registered_users` folder.  
-3. Run the following scripts in separated terminals.
-
+3. Run the following scripts in separated terminals.  
+  
 (A) Run the roscore to initiate  
 `roscore`  
 (B) Run speech_recognition module  
