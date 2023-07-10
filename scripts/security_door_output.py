@@ -20,7 +20,7 @@ class Server:
     
     def compute(self):
         global correct
-        if self.keyword == "call" and self.detection == True:
+        if self.keyword == "hello" and self.detection == True:
             if correct == False:
                 subprocess.check_output(['rosrun', 'sound_play', 'say.py', "Correct"])
             correct = True
