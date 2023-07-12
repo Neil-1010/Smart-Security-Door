@@ -27,17 +27,22 @@ video_capture = cv2.VideoCapture(0)
 user1_image = face_recognition.load_image_file("registered_users/chunfang.jpg")
 user1_face_encoding = face_recognition.face_encodings(user1_image)[0]
 
-user2_image = face_recognition.load_image_file("registered_users/neil.jpg")
+user2_image = face_recognition.load_image_file("registered_users/sam.jpg")
 user2_face_encoding = face_recognition.face_encodings(user2_image)[0]
+
+user3_image = face_recognition.load_image_file("registered_users/neil.jpg")
+user3_face_encoding = face_recognition.face_encodings(user3_image)[0]
 
 # Create arrays of known face encodings and their names
 known_face_encodings = [
     user1_face_encoding,
-    user2_face_encoding
+    user2_face_encoding,
+    user3_face_encoding
 ]
 
 known_face_names = [
     "Chun Fang",
+    "Sam",
     "Neil"
 ]
 
@@ -73,7 +78,7 @@ while True:
         for face_encoding in face_encodings:
             # See if the face is a match for the known face(s)
             matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
-            name = "Unknown"
+            name = "Invalid"
 
             # # If a match was found in known_face_encodings, just use the first one.
             # if True in matches:
@@ -115,7 +120,9 @@ while True:
     
     response = "Invalid"
 
-    if len(face_names) != 0:
+    if len(face_names)==0:
+        response = "No one detected"
+    elif len(face_names) != 0:
         response = face_names[0]
 
     if (time.time() - start) > 1:

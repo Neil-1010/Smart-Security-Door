@@ -1,7 +1,7 @@
 import rospy
 from sensor_msgs.msg import Image
 from opencv_apps.msg import FaceArrayStamped
-from std_msgs.msg import Bool
+from std_msgs.msg import Bool, String
 import socket
 
 if __name__ == '__main__':
@@ -18,11 +18,12 @@ if __name__ == '__main__':
     rospy.init_node('door_listener')
     
     # Publish data via detect_result topic
-    pub = rospy.Publisher('/detect_result',Bool, queue_size =1)
+    pub = rospy.Publisher('/detect_result',String, queue_size =10)
 
     # Register authorized users
     known_face_names = [
     "Chun Fang",
+    "Sam",
     "Neil"
     ]
 
@@ -32,6 +33,7 @@ if __name__ == '__main__':
             client_socket, client_address = server_socket.accept()
             response = client_socket.recv(1024)
             data = response.decode()
+            # client_socket, client_address = client_socket.connect(server_address)
 
             # Display response from time to time
             print("Received response: " +str(data))
@@ -39,9 +41,17 @@ if __name__ == '__main__':
             # Recognize registered users based on conditions
             if data in known_face_names:
                 print("Welcome, "+str(data)+"!")
-                pub.publish(Bool(True))
+                msg = String()
+                msg.data = "Yes"
+                pub.publish(msg)
+            elif data == "Invalid":
+                msg = String()
+                msg.data = "No"
+                pub.publish(msg)
             else:
-                pub.publish(Bool(False))
+                msg = String()
+                msg.data = "Null"
+                pub.publish(msg)
 
         except KeyboardInterrupt:
             if client_socket:

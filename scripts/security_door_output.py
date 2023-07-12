@@ -3,8 +3,6 @@ import message_filters
 from std_msgs.msg import Bool, String
 import subprocess
 
-correct = False
-
 class Server:
     def __init__(self):
         self.keyword = ""
@@ -19,17 +17,12 @@ class Server:
         self.detection = msg.data
     
     def compute(self):
-        global correct
         # Keyword represents the 'access passcode'
         # A valid access shall require correct keyword and valid facial recognition
-        if self.keyword == "hello" and self.detection == True:
-            if correct == False:
-                subprocess.check_output(['rosrun', 'sound_play', 'say.py', "Correct"])
-            correct = True
-        else:
-            if correct == True:
-                subprocess.check_output(['rosrun', 'sound_play', 'say.py', "Try Again"])
-            correct = False
+        if self.keyword == "hello" and self.detection == "Yes":
+            subprocess.check_output(['rosrun', 'sound_play', 'say.py', "You may enter"])
+        elif self.detection == "No":
+            subprocess.check_output(['rosrun', 'sound_play', 'say.py', "Please try again"])
 
 
 if __name__ == '__main__':
@@ -42,6 +35,6 @@ if __name__ == '__main__':
     
     # Establish connections
     sub = rospy.Subscriber('/result', String, server.keyword_callback) 
-    sub2 = rospy.Subscriber('/detect_result', Bool, server.detection_callback)
+    sub2 = rospy.Subscriber('/detect_result', String, server.detection_callback)
     
     rospy.spin()
